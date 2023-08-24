@@ -1,6 +1,5 @@
 import Car from "../src/Car";
 import InputCarNames from "../src/InputCarNames";
-import PrintRoundResult from "../src/PrintRoundResult";
 import RacingGame from "../src/RacingGame";
 
 describe("자동차 이름을 입력받기", () => {
