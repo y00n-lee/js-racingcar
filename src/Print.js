@@ -7,15 +7,18 @@ Print.prototype.gameWinner = function (cars) {
     PRINT_WINNER: (winnerName) => `${winnerName}가 최종 우승했습니다.`,
   });
 
-  const findMaxDistance = cars.reduce((acc, cur) => Math.max(acc, cur.getPosition()), 0);
-  if (MIN_WINNER_DISTANCE > findMaxDistance) return console.log(WINNING_RESULT_MESSAGE.NO_WINNER);
+  const maxDistance = cars.reduce((acc, cur) => Math.max(acc, cur.getPosition()), 0);
 
-  const winnerName = cars.reduce((acc, cur) => {
-    if (cur.getPosition() === findMaxDistance) return acc + cur.getName() + ",";
-    return acc;
-  }, "");
+  if (MIN_WINNER_DISTANCE > maxDistance) {
+    return console.log(WINNING_RESULT_MESSAGE.NO_WINNER);
+  }
 
-  console.log(WINNING_RESULT_MESSAGE.PRINT_WINNER(winnerName.slice(0, -1)));
+  const winners = cars
+    .filter((car) => car.getPosition() === maxDistance)
+    .map((winnerCar) => winnerCar.getName())
+    .join(",");
+
+  console.log(WINNING_RESULT_MESSAGE.PRINT_WINNER(winners));
 };
 
 Print.prototype.roundResult = function (cars) {
